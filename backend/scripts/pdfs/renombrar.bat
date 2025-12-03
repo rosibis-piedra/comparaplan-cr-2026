@@ -1,0 +1,23 @@
+@echo off
+ren "Plan-de-Gobierno-Coalicion-Agenda-Ciudadana.pdf" "Agenda Ciudadana.pdf"
+ren "Plan-de-Gobierno-ACRM.pdf" "ACRM.pdf"
+ren "Plan-de-Gobierno-Avanza.pdf" "Avanza.pdf"
+ren "Plan-de-Gobierno-Centro-Democratico-y-Social.pdf" "Centro Democratico.pdf"
+ren "Plan-de-Gobierno-CR1.pdf" "CR1.pdf"
+ren "Plan-de-Gobierno-Esperanza-y-Libertad.pdf" "Esperanza y Libertad.pdf"
+ren "Plan-de-Gobierno-Frente-Amplio.pdf" "Frente Amplio.pdf"
+ren "Plan-de-Gobierno-Partido-Integracion-Nacional.pdf" "Integracion Nacional.pdf"
+ren "Plan-de-Gobierno-Partido-Justicia-Social-Costarricense.pdf" "Justicia Social.pdf"
+ren "Plan-de-Gobierno-Partido-Liberacion-Nacional.pdf" "PLN.pdf"
+ren "Plan-de-Gobierno-Partido-Liberal-Progresista.pdf" "Liberal Progresista.pdf"
+ren "Plan-de-Gobierno-Partido-Nueva-Generacion.pdf" "Nueva Generacion.pdf"
+ren "Plan-de-Gobierno-Partido-Nueva-Republica.pdf" "Nueva Republica.pdf"
+ren "Plan-de-Gobierno-Partido-Progreso-Social.pdf" "Progreso Social.pdf"
+ren "Plan-de-Gobierno-Partido-Pueblo-Soberano.pdf" "Pueblo Soberano.pdf"
+ren "Plan-del-Gobierno-PUSC.pdf" "PUSC.pdf"
+ren "Plan-de-Gobierno-Unidos-Podemos.pdf" "Unidos Podemos.pdf"
+ren "PUCD.pdf" "PUCD.pdf"
+ren "Plan-de-Gobierno-Partido-de-la-Clase-Trabajadora.pdf" "Clase Trabajadora.pdf"
+ren "Plan-de-Gobierno-Partido-Esperanza-Nacional.pdf" "Esperanza Nacional.pdf"
+echo Renombrado completado!
+pause
