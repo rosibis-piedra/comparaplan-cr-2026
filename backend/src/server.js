@@ -4,10 +4,10 @@ const helmet = require('helmet');
 const compression = require('compression');
 require('dotenv').config();
 
-const cors = require('cors');
-app.use(cors());
-
 const app = express();
+app.use(cors());
+app.use(express.json());
+
 const PORT = process.env.PORT || 3001;
 
 app.use(helmet());
