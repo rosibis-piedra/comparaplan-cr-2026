@@ -4,6 +4,9 @@ const helmet = require('helmet');
 const compression = require('compression');
 require('dotenv').config();
 
+const cors = require('cors');
+app.use(cors());
+
 const app = express();
 const PORT = process.env.PORT || 3001;
 
