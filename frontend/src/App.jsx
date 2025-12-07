@@ -62,13 +62,19 @@ function App() {
         </main>
 
         <footer>
-  <p>
-    Herramienta ciudadana independiente sin fines de lucro • Datos de planes oficiales TSE 2026
-  </p>
-  <p style={{ fontSize: '0.8rem', color: '#999' }}>
-    PlanesCR2026 no está afiliado con ninguna entidad comercial o política
-  </p>
-  <p style={{ fontSize: '0.8rem', color: '#999' }}>
-    Creado por Rosibis Piedra
-  </p>
-</footer>
+          <p>
+            Herramienta ciudadana independiente sin fines de lucro • Datos de planes oficiales TSE 2026
+          </p>
+          <p style={{ fontSize: '0.8rem', color: '#999' }}>
+            PlanesCR2026 no está afiliado con ninguna entidad comercial o política
+          </p>
+          <p style={{ fontSize: '0.8rem', color: '#999' }}>
+            Creado por Rosibis Piedra
+          </p>
+        </footer>
+      </div>
+    </>
+  );
+}
+
+export default App;
