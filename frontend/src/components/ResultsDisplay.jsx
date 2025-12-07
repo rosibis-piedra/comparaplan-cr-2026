@@ -23,17 +23,17 @@ export default function ResultsDisplay({ result }) {
   }
 
   let parsedData = null;
-try {
-  let jsonText = result.comparacion;
-  if (typeof jsonText === 'string') {
-    jsonText = jsonText.replace(/```json\s*/g, '').replace(/```\s*/g, '').trim();
-    parsedData = JSON.parse(jsonText);
-  } else {
-    parsedData = jsonText;
+  try {
+    let jsonText = result.comparacion;
+    if (typeof jsonText === 'string') {
+      jsonText = jsonText.replace(/```json\s*/g, '').replace(/```\s*/g, '').trim();
+      parsedData = JSON.parse(jsonText);
+    } else {
+      parsedData = jsonText;
+    }
+  } catch (e) {
+    console.log('Error parsing JSON:', e);
   }
-} catch (e) {
-  console.log('Error parsing JSON:', e);
-}
 
   return (
     <div style={{ marginTop: '2rem' }}>
@@ -49,6 +49,22 @@ try {
             marginBottom: '1.5rem'
           }}>
             <p style={{ color: '#000', margin: 0, lineHeight: '1.6' }}>{parsedData.resumen}</p>
+          </div>
+
+          <div style={{
+            backgroundColor: '#fff3cd',
+            border: '1px solid #ffc107',
+            borderRadius: '8px',
+            padding: '1rem',
+            marginBottom: '1.5rem'
+          }}>
+            <p style={{ color: '#856404', margin: 0, fontSize: '0.9rem', lineHeight: '1.6' }}>
+              ⚠️ <strong>Importante:</strong> Esta comparación analiza las secciones más relevantes de cada plan según el tema buscado. 
+              Puede haber información adicional en los documentos completos. Te recomendamos revisar el plan oficial completo haciendo clic en cada partido o visitando el{' '}
+              <a href="https://www.tse.go.cr/2026/planesgobierno.html" target="_blank" rel="noopener noreferrer" style={{ color: '#856404', textDecoration: 'underline' }}>
+                sitio del TSE
+              </a>.
+            </p>
           </div>
 
           <h3 style={{ color: '#000', marginBottom: '1rem' }}>Propuestas por partido:</h3>
@@ -83,11 +99,25 @@ try {
                 <div style={{
                   padding: '1rem',
                   borderTop: '1px solid #dee2e6',
-                  backgroundColor: '#f8f9fa',
-                  color: '#000',
-                  lineHeight: '1.6'
+                  backgroundColor: '#f8f9fa'
                 }}>
-                  {partido.propuesta}
+                  <p style={{ color: '#000', lineHeight: '1.6', marginBottom: '1rem' }}>
+                    {partido.propuesta}
+                  </p>
+                  <a 
+                    href="https://www.tse.go.cr/2026/planesgobierno.html" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    style={{
+                      display: 'inline-block',
+                      color: '#007bff',
+                      textDecoration: 'none',
+                      fontSize: '0.85rem',
+                      marginTop: '0.5rem'
+                    }}
+                  >
+                    📄 Ver plan completo de este partido en el TSE →
+                  </a>
                 </div>
               )}
             </div>
