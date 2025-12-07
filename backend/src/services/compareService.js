@@ -1,5 +1,4 @@
 // backend/src/services/compareService.js
-const pool = require('../config/database');
 const { anthropic, CLAUDE_MODEL } = require('../config/claude');
 const cacheService = require('./cacheService');
 
@@ -10,10 +9,12 @@ class CompareService {
   const keywords = query.toLowerCase().split(' ').filter(w => w.length > 3);
   // Solo partidos principales según encuestas
 const partidosPrincipales = [
-  'Pueblo Soberano', 
-  'PLN', 
-  'Frente Amplio', 
-  'PUSC', 
+  'Pueblo Soberano',
+  'PLN',
+  'Partido Liberación Nacional',
+  'Frente Amplio',
+  'PUSC',
+  'Partido Unidad Social Cristiana',
   'Nueva Republica',
   'Agenda Ciudadana',
   'Progreso Social',
@@ -32,7 +33,7 @@ const partidosPrincipales = [
         plan_url
       )
     `)
-    .or(keywords.map(k => `tema.ilike.%${k}%`).join(','))
+    .or(keywords.map(k => `tema.ilike.%${k}%,contenido.ilike.%${k}%`).join(','))
 
   if (error) throw error;
 // Filtrar solo partidos principales
@@ -45,7 +46,7 @@ const byPartido = {};
 filtered.forEach(row => {  // ← Cambiar data por filtered
   const pid = row.partido_id;
   if (!byPartido[pid]) byPartido[pid] = [];
-  if (byPartido[pid].length < 5) {
+  if (byPartido[pid].length < 2) {
     byPartido[pid].push(row);
   }
 });
@@ -128,7 +129,7 @@ return limited.map(row => ({
       }
       acc[s.partido_nombre].contenido.push({
         tema: s.tema,
-        texto: s.contenido.substring(0, 1500), // Limitar para tokens
+        texto: s.contenido.substring(0, 600), // Limitar para tokens
         pagina: s.pagina_inicio
       });
       return acc;
@@ -185,11 +186,17 @@ CRÍTICO: Tu respuesta debe ser ÚNICAMENTE JSON válido, sin texto adicional an
 
   async logQuery(query, tokens, time, cacheHit) {
     try {
-      await pool.query(
-        `INSERT INTO logs_consultas (query, tokens_usados, tiempo_respuesta_ms, cache_hit)
-         VALUES ($1, $2, $3, $4)`,
-        [query, tokens, time, cacheHit]
-      );
+    const supabase = require('../config/database');
+    const { error } = await supabase
+  .from('logs_consultas')
+  .insert({
+    query: query,
+    tokens_usados: tokens,
+    tiempo_respuesta_ms: time,
+    cache_hit: cacheHit
+  });
+
+if (error) throw error;
     } catch (error) {
       console.error('Error logging query:', error);
     }
