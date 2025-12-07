@@ -52,16 +52,16 @@ export default function ResultsDisplay({ result }) {
           </div>
 
           <div style={{
-            backgroundColor: '#fff3cd',
-            border: '1px solid #ffc107',
+            backgroundColor: '#fff8e1',
+            border: '2px solid #ff9800',
             borderRadius: '8px',
             padding: '1rem',
             marginBottom: '1.5rem'
           }}>
-            <p style={{ color: '#856404', margin: 0, fontSize: '0.9rem', lineHeight: '1.6' }}>
+            <p style={{ color: '#663c00', margin: 0, fontSize: '0.9rem', lineHeight: '1.6', fontWeight: '500' }}>
               ⚠️ <strong>Importante:</strong> Esta comparación analiza las secciones más relevantes de cada plan según el tema buscado. 
               Puede haber información adicional en los documentos completos. Te recomendamos revisar el plan oficial completo haciendo clic en cada partido o visitando el{' '}
-              <a href="https://www.tse.go.cr/2026/planesgobierno.html" target="_blank" rel="noopener noreferrer" style={{ color: '#856404', textDecoration: 'underline' }}>
+              <a href="https://www.tse.go.cr/2026/planesgobierno.html" target="_blank" rel="noopener noreferrer" style={{ color: '#663c00', textDecoration: 'underline' }}>
                 sitio del TSE
               </a>.
             </p>
