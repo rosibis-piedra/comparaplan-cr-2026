@@ -18,10 +18,8 @@ function SearchBar({ onSearch, loading }) {
     // Llamar a la búsqueda
     await onSearch(query.trim(), captchaToken);
     
-    // Resetear después de la búsqueda
-    setQuery('');
-    setCaptchaToken(null);
-    recaptchaRef.current?.reset();
+    // NO resetear query ni captcha - dejar que usuario vea resultados
+    // Usuario puede hacer nueva búsqueda cuando quiera
   };
 
   const handleCaptchaChange = (token) => {
@@ -30,7 +28,7 @@ function SearchBar({ onSearch, loading }) {
 
   const handleCaptchaExpired = () => {
     setCaptchaToken(null);
-    alert('El captcha expiró. Por favor complétalo de nuevo.');
+    // Silencioso - no interrumpir al usuario con alerts
   };
 
   return (
