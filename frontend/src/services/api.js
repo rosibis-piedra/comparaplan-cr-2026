@@ -11,9 +11,9 @@ const api = axios.create({
 });
 
 export const compareService = {
-  async compare(query, captchaToken) {
+  async compare(query) {
     try {
-      const response = await api.post('/api/compare', { query, captchaToken });
+      const response = await api.post('/api/compare', { query });
       return response.data;
     } catch (error) {
       if (error.response) {

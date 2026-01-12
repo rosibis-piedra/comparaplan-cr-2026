@@ -1,34 +1,15 @@
-import { useState, useRef } from 'react';
-import ReCAPTCHA from 'react-google-recaptcha';
+import { useState } from 'react';
 
 function SearchBar({ onSearch, loading }) {
   const [query, setQuery] = useState('');
-  const [captchaToken, setCaptchaToken] = useState(null);
-  const recaptchaRef = useRef(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     
     if (query.trim().length < 3) return;
-    if (!captchaToken) {
-      alert('Por favor completa el captcha');
-      return;
-    }
 
-    // Llamar a la búsqueda
-    await onSearch(query.trim(), captchaToken);
-    
-    // NO resetear query ni captcha - dejar que usuario vea resultados
-    // Usuario puede hacer nueva búsqueda cuando quiera
-  };
-
-  const handleCaptchaChange = (token) => {
-    setCaptchaToken(token);
-  };
-
-  const handleCaptchaExpired = () => {
-    setCaptchaToken(null);
-    // Silencioso - no interrumpir al usuario con alerts
+    // Llamar a la búsqueda sin captcha
+    await onSearch(query.trim(), null);
   };
 
   return (
@@ -37,7 +18,7 @@ function SearchBar({ onSearch, loading }) {
         type="text"
         value={query}
         onChange={(e) => setQuery(e.target.value)}
-        placeholder="Ej: pensiones, salud, educación, seguridad..."
+        placeholder="Ej: pensiones, salud, educación, seguridad, impuestos, renta, cultura..."
         disabled={loading}
         style={{
           width: '100%',
@@ -50,32 +31,23 @@ function SearchBar({ onSearch, loading }) {
         }}
       />
       
-      <div style={{ marginBottom: '15px', display: 'flex', justifyContent: 'center' }}>
-        <ReCAPTCHA
-          ref={recaptchaRef}
-          sitekey={import.meta.env.VITE_RECAPTCHA_SITE_KEY}
-          onChange={handleCaptchaChange}
-          onExpired={handleCaptchaExpired}
-        />
-      </div>
-      
       <p style={{ color: '#999', fontSize: '14px', marginBottom: '15px' }}>
-        Ingresa un tema de tu interés para comparar las propuestas de los partidos
+        Ingresa un tema de tu interés para comparar las propuestas de los partidos políticos
       </p>
       
       <button
         type="submit"
-        disabled={loading || query.trim().length < 3 || !captchaToken}
+        disabled={loading || query.trim().length < 3}
         style={{
           width: '100%',
           padding: '15px',
           fontSize: '18px',
           fontWeight: 'bold',
-          backgroundColor: query.trim().length >= 3 && captchaToken && !loading ? '#6c757d' : '#ccc',
+          backgroundColor: query.trim().length >= 3 && !loading ? '#6c757d' : '#ccc',
           color: 'white',
           border: 'none',
           borderRadius: '8px',
-          cursor: query.trim().length >= 3 && captchaToken && !loading ? 'pointer' : 'not-allowed'
+          cursor: query.trim().length >= 3 && !loading ? 'pointer' : 'not-allowed'
         }}
       >
         {loading ? 'Comparando...' : 'Comparar Planes'}
